@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3dca4569-e3fd-4834-8a4f-c2e0a0c9636a" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attempt_1/attempt_1/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/attempt_1/attempt_1/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -70,8 +70,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/attempt_1/qa/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="588" column="19" lean-forward="true" selection-start-line="588" selection-start-column="19" selection-end-line="588" selection-end-column="19" />
+            <state relative-caret-position="380">
+              <caret line="591" lean-forward="true" selection-start-line="591" selection-end-line="591" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -79,11 +79,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/attempt_1/attempt_1/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="98">
-              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+            <state relative-caret-position="237">
+              <caret line="125" column="4" selection-start-line="125" selection-start-column="4" selection-end-line="125" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -109,7 +109,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>2</find>
       <find>forward = true;</find>
       <find>values_input</find>
       <find>add_question_cancel</find>
@@ -139,6 +138,7 @@
       <find>.layout_3col_left</find>
       <find>url</find>
       <find>feed-top-answer-desc</find>
+      <find>static</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/attempt_1/static/images</dir>
@@ -165,7 +165,6 @@
         <option value="$PROJECT_DIR$/attempt_1/static/images/topic_grey.svg" />
         <option value="$PROJECT_DIR$/attempt_1/qa/templates/qa/question_detail_right_sidebar.html" />
         <option value="$PROJECT_DIR$/attempt_1/static/js/popper.min.js" />
-        <option value="$PROJECT_DIR$/attempt_1/attempt_1/settings.py" />
         <option value="$PROJECT_DIR$/attempt_1/attempt_1/urls.py" />
         <option value="$PROJECT_DIR$/attempt_1/qa/templates/home_filter.html" />
         <option value="$PROJECT_DIR$/attempt_1/qa/templates/qa/add_question_modal.html" />
@@ -198,6 +197,7 @@
         <option value="$PROJECT_DIR$/attempt_1/static/css/style.css" />
         <option value="$PROJECT_DIR$/attempt_1/qa/templates/qa/includes/profile_right_sidebar.html" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/attempt_1/attempt_1/settings.py" />
       </list>
     </option>
   </component>
@@ -222,6 +222,12 @@
             <path>
               <item name="ProjectAttempt" type="b2602c69:ProjectViewProjectNode" />
               <item name="ProjectAttempt" type="462c0819:PsiDirectoryNode" />
+              <item name="attempt_1" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectAttempt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectAttempt" type="462c0819:PsiDirectoryNode" />
+              <item name="attempt_1" type="462c0819:PsiDirectoryNode" />
               <item name="attempt_1" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -379,13 +385,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="42">
           <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/attempt_1/attempt_1/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="135" lean-forward="true" selection-start-line="135" selection-end-line="135" />
         </state>
       </provider>
     </entry>
@@ -638,20 +637,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/attempt_1/qa/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="588" column="19" lean-forward="true" selection-start-line="588" selection-start-column="19" selection-end-line="588" selection-end-column="19" />
+        <state relative-caret-position="380">
+          <caret line="591" lean-forward="true" selection-start-line="591" selection-end-line="591" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/attempt_1/attempt_1/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+        <state relative-caret-position="237">
+          <caret line="125" column="4" selection-start-line="125" selection-start-column="4" selection-end-line="125" selection-end-column="4" />
         </state>
       </provider>
     </entry>
