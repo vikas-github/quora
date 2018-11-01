@@ -1,0 +1,56 @@
+{% extends 'qa/base.html' %}
+{% load qa_extras %}
+
+{% block title %}Home{% endblock %}
+{% block main_class %}{% endblock %}
+
+{% block menu_content %}
+    {% include "qa/includes/nav.html" %}
+{% endblock %}
+
+{% block left_sidebar_content %}
+    {% include "qa/includes/home_left_sidebar.html" %}
+{% endblock %}
+
+{% block right_sidebar_content %}
+    {% include "qa/includes/home_right_sidebar.html" %}
+{% endblock %}
+
+    <!--<ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+          <a class="btn btn-primary" href="{% url 'logout' %}" >logout</a>
+      </li>
+    </ul>-->
+
+{% block ask_question_block %}
+
+<div class="ask_question_prompt" >
+        {% if user.is_authenticated %}
+         <div class="asking_user">
+             <span class="asking_user_name_photo">
+                <a href="/profile/{{user.username}}" >
+                    <img class="profile_photo_img" src="/{{user|getuseravatar}}" alt="{{user.first_name}} {{user.last_name}}" height="50" width="50">
+                </a>
+                 <span class="asking_user_name">
+                     <a class="user" href="/profile/{{user.username}}">{{user.first_name}} {{user.last_name}}</a>
+                 </span>
+
+             </span>
+         </div>
+        {% endif %}
+         <a class="ask_question_button" href="#" ><span class="button_text" >What is your question?</span></a>
+</div>
+
+{% endblock %}
+
+{% block content %}
+{% if post_list %}
+    {% if active_page == "home_new" or active_page == "home_top" or active_page == "question_list" %}
+        {% include "qa/includes/question_list.html" %}
+    {% elif active_page == "home_book" or active_page == "answer_list" %}
+        {% include "qa/includes/answer_list.html" %}
+    {% endif %}
+{% else %}
+    <p class="no_post_info">You dont have any questions to show here!</p>
+{% endif %}
+{% endblock %}

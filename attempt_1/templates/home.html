@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block user_dropdown %}
+{% if user.is_authenticated %}
+
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span class="nav_item_icon">
+              <svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <g id="Icons" class="site_nav_icon-fill" stroke="none" fill="#555" fill-rule="evenodd">
+                  <path d="M4,7.99448227 C4,5.23610588 6.24325385,3 9.00365614,3 L46,3 L46,42.1055177 C46,44.8638941 43.7567461,47.1 40.9963439,47.1 L4,47.1 L4,7.99448227 M11,12 L25,12 L25,14 L11,14 M11,20 L25,20 L25,22 L11,22 M11,28 L39,28 L39,30 L11,30 M11,36 L39,36 L39,38 L11,38 M29,12 L39,12 L39,22 L29,22 Z"></path>
+              </g>
+              </svg>
+          </span>
+          <b>Home</b></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><b>Topics</b></a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search">
+      <!--<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>-->
+    </form>
+    <!--<ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+          <a class="btn btn-primary" href="{% url 'logout' %}" >logout</a>
+      </li>
+    </ul>-->
+
+{% else %}
+  <p>You are not logged in</p>
+  <a class="btn btn-primary btn-lg" role="button" href="{% url 'login' %}">login</a>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="main-feed-item">
+  <a class="main-feed-header-text" href="#">If C++ is faster than Java, how come Java is used in every enterprise application?</a>
+  <div class="feed-author">
+    <div class="author-info-pic">
+      <img class="profile_photo_img" src="https://qph.ec.quoracdn.net/main-thumb-189662175-50-nlacuvuthjfpbtjeypwczxmegutvhhvn.jpeg" alt="Vikas Devde" height="50" width="50" />
+    </div>
+    <div class="author-info-text">
+      <div class="author-info-name"><span><a href="" >Vikas Devde</a></span></div>
+      <div class="feed-answered"><a href="" class="feed-answered-link">4 hours ago</a></div>
+    </div>
+  </div>
+  <div class="feed-top-answer-desc">
+    <p>Here are some tips or ways to get the word out for free. To get your page up to the top of the search engines here are seven website promotion tips you need to follow, and practice in order to get effective results</p>
+  </div>
+</div>
+{% endblock %}

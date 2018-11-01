@@ -1,0 +1,35 @@
+<div class="layout_3col_right">
+    <div class="fixed_sidebar" style="top: 83px; position: static; width: 100%;">
+        <div class="about_box">
+            <h3 class="title">Credentials &amp; Highlights
+                <!--<a class="" href="#">More</a>-->
+            </h3>
+            <div class="contents">
+                {% if puser.profession %}
+                <div class="about_list_item">
+                    <div class="list_item_icon cred_work"></div>
+                    <span class="main_text">
+                        <span class="UserCredential">{{puser.profession}}</span>
+                    </span>
+                </div>
+                {% endif %}
+                {% if puser.studied %}
+                <div class="about_list_item">
+                    <div class="list_item_icon cred_study"></div>
+                    <span class="main_text">
+                        <span class="UserCredential">Studied {{puser.studied}}</span>
+                    </span>
+                </div>
+                {% endif %}
+                {% if puser.location %}
+                <div class="about_list_item">
+                    <div class="list_item_icon cred_lives"></div>
+                    <span class="main_text">
+                        <span class="UserCredential">Lives in {{puser.location}}</span>
+                    </span>
+                </div>
+                 {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+{% load static %}
+{% load qa_extras %}
+<html>
+<head>
+  {% include "qa/includes/common_headers.html" %}
+  <script>
+     {% block page_level_js %}{% endblock %}
+  </script>
+  <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+  <main class="bg {% block main_class %}{% endblock %}">
+
+
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"><span style="display:none">Quora</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor02">
+          {% block menu_content %}{% endblock %}
+        </div>
+      </nav>
+
+      <!--<div class="container-sidebar">-->
+      <div class="col-md-2 box">
+        {% block left_sidebar_content %}{% endblock %}
+      </div>
+
+      <!--<div class="container-body">-->
+      <div class="col-md-8 box">
+        {% block ask_question_block %}{% endblock %}
+        {% block content %}
+        {% endblock %}
+
+      </div>
+      <div class="col-md-2 box improve_feed_checklist">
+        {% block right_sidebar_content %}{% endblock %}
+
+      </div>
+
+    </div>
+    <div class="clear"></div>
+    <div class="footer">
+        <a href="vectorslab.in"><p>Vectors Lab. Productions</p></a>
+    </div>
+
+  </main>
+
+  <!--share modal-->
+  {% include "qa/includes/share_answer_modal.html" %}
+  <!--ask question modal-->
+  {% include "qa/includes/add_question_modal.html" %}
+  <!--edit question modal-->
+  {% include "qa/includes/edit_question_modal.html" %}
+  <!--edit question topics modal-->
+  {% include "qa/includes/edit_question_topics_modal.html" %}
+
+    <div class="error-badge sticky-badge">
+        <!--<span class="badge badge-warning">Warn</span>-->
+    </div>
+</body>
+</html>

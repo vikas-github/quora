@@ -1,0 +1,66 @@
+{% load qa_extras %}
+<div class="layout_3col_left type2">
+   <div>
+      <div class="row section">
+         <div class="left_nav_list">
+            <h3 class="title">
+               <div class="title_with_link">Feeds</div>
+            </h3>
+            <div class="home_left_nav_list_content">
+               <div class="pagedlist_item">
+                  <div class="HomeNavListContentItem {% if active_page == 'answers' %} home_nav_item_selected {% endif %}">
+                     <ul>
+                        <li class="NavListItem HomeNavListItem ">
+                           <a class="disable_click_on_edit_mode" href="{% url 'qa:user_profile' puser.user.id 'answers' %}" >
+                              <span class="home_nav_non_topic_item">
+                                 Answers
+                              </span>
+                           </a>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+               <div class="pagedlist_item">
+                  <div class="HomeNavListContentItem {% if active_page == 'questions' %} home_nav_item_selected {% endif %}">
+                     <ul>
+                        <li class="NavListItem HomeNavListItem">
+                           <a class="disable_click_on_edit_mode" href="{% url 'qa:user_profile' puser.user.id 'questions' %}" >
+                              <span class="home_nav_non_topic_item">
+                                 Questions
+                              </span>
+                           </a>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+               <div class="pagedlist_item">
+                  <div class="HomeNavListContentItem {% if active_page == 'followers' %} home_nav_item_selected {% endif %}">
+                     <ul>
+                        <li class="NavListItem HomeNavListItem ">
+                           <a class="disable_click_on_edit_mode" href="{% url 'qa:user_profile' puser.user.id 'followers' %}" >
+                              <span class="home_nav_non_topic_item">
+                                 Followers
+                              </span>
+                           </a>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+               <div class="pagedlist_item">
+                  <div class="HomeNavListContentItem {% if active_page == 'following' %} home_nav_item_selected {% endif %}">
+                     <ul>
+                        <li class="NavListItem HomeNavListItem ">
+                           <a class="disable_click_on_edit_mode" href="{% url 'qa:user_profile' puser.user.id 'following' %}" >
+                              <span class="home_nav_non_topic_item">
+                                 Following
+                              </span>
+                           </a>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

@@ -1,0 +1,16 @@
+{% load static %}
+{% load qa_extras %}
+
+<meta charset="utf-8">
+{% if user.is_authenticated %}
+<meta name="user_full_name" content="{{user.first_name}} {{user.last_name}}">
+<meta name="user_profile_pic" content="/{{user|getuseravatar}}">
+{% endif %}
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.autoSuggest.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

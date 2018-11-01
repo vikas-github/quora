@@ -1,0 +1,58 @@
+{% extends 'qa/base.html' %}
+{% load qa_extras %}
+
+{% block title %}Answer | {{question.question_text}}{% endblock %}
+{% block main_class %}white-bg{% endblock %}
+{% block menu_content %}
+    {% include "qa/includes/nav.html" %}
+{% endblock %}
+
+{% block page_level_js %}
+window.onload = function() {
+  var input = document.getElementById("post-answer-area").focus();
+}
+{% endblock %}
+
+{% block content %}
+<div class="question_title">
+    <p class="main-feed-header-text big-title-text">{{question.question_text}}</p>
+</div>
+<div class="feed-author answer-author">
+    <div class="author-info-pic">
+      <img class="profile_photo_img" src="/{{user|getuseravatar}}" alt="{{user.first_name}} {{user.last_name}}" height="50" width="50" />
+    </div>
+    <div class="author-info-text">
+      <div class="author-info-name">
+         <span><a href="{% url 'qa:user_profile' user.id %}" >{{user.first_name}} {{user.last_name}}</a></span>
+      </div>
+      <div class="feed-answered"><a href={% url "qa:question_detail" question.id %} class="feed-answered-link">Answering Now</a></div>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="answer-box" >
+    {% if error %}
+    <div class="alert alert-dismissible alert-danger">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <span>{{error}}</span><span> Go to Question page, <a href={% url 'qa:question_detail' question.id %}>{{ question.question_text|slice:"0:40" }}...</a></span>
+    </div>
+    {% else %}
+        {% if origin == 'edit_answer' %}
+        <form action={% url 'qa:edit_answer' question_id=question.id answer_id=answer.id %} method="post">
+        {% else %}
+        <form action={% url 'qa:post_answer' question.id %} method="post">
+        {% endif %}
+            {% csrf_token %}
+            <textarea id="post-answer-area" name="answer_text" placeholder="Write your answer..." class="form-control answer-post-textarea" >{{answer.answer_text}}</textarea>
+            <div class="post_answer_btn_block">
+                <input type="submit" class="post_answer_btn submit-btn form-control btn btn-primary" />
+                <button type="button" class="post_answer_btn cancel-btn form-control btn btn-secondary">Cancel</button>
+            </div>
+        </form>
+    {% endif %}
+</div>
+{% endblock %}

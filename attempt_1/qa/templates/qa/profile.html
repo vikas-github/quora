@@ -1,0 +1,81 @@
+{% extends 'qa/two_col_base.html' %}
+{% load qa_extras %}
+
+{% block title %}{{puser.user.first_name}} {{puser.user.last_name}}'s {{active_page.title}}{% endblock %}
+{% block main_class %}white-bg{% endblock %}
+{% block menu_content %}
+    {% include "qa/includes/nav.html" %}
+{% endblock %}
+{% block qdetail_right_sidebar %}
+    {% include "qa/includes/profile_right_sidebar.html" %}
+{% endblock %}
+
+{% block col1_width_block %}9{% endblock %}
+{% block col2_width_block %}3{% endblock %}
+
+{% block content %}
+{% if puser %}
+    <div class="jumbotron profile_jumbo">
+        <div class="profile_topper">
+            <div class="profile_pic_container">
+                <img class="profile_photo_img" src="/{{puser.user|getuseravatar}}" alt="{{puser.user.first_name}} {{puser.user.last_name}}">
+            </div>
+            <div class="profile_header_content">
+                <div class="profile_user_name"><span class="user_full_name">{{puser.user.first_name}} {{puser.user.last_name}}</span></div>
+                <div class="profile_credential">
+                    <span>{{puser.profile_cred}}</span>
+                    {% if user == puser.user %}
+                    <a class="profile_cred_edit" href="#">Edit</a>
+                    {% endif %}
+                </div>
+                <div class="profile_description">
+                    <span>{{puser.short_bio}}</span>
+                    {% if user == puser.user %}
+                    <a class="profile_desc_edit" href="#">Edit</a>
+                    {% endif %}
+                </div>
+                <div class="action_bar" style="margin-top: 0px;">
+                      {% if user.is_authenticated and user != puser.user %}
+                      <div class="action_item">
+                         <a class="icon_action_bar-button blue_icon" href="#" style="margin-top: 8px;" >
+                            <div class="icon_action_bar-icon icon_action_bar-icon_offset">
+                               <span class="action_bar-inline_icon">
+                                  <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <g id="follow_user" stroke="none" fill="none" fill-rule="evenodd">
+                                            <g class="icon_svg-stroke" transform="translate(3.000000, 3.000000)" stroke="#666" stroke-width="1.5">
+                                                <path d="M8.25,8.75 C9.492,8.75 10.5,7.743 10.5,6.5 C10.5,5.257 9.492,4.25 8.25,4.25 C7.007,4.25 6,5.257 6,6.5 C6,7.743 7.007,8.75 8.25,8.75 Z M11.25,12.75 C11.25,11.093 9.907,9.75 8.25,9.75 C6.593,9.75 5.25,11.093 5.25,12.75" id="user"></path>
+                                                <path d="M9.75,15.75 L3.75,15.75 C2.093,15.75 0.75,14.407 0.75,12.75 L0.75,3.75 C0.75,2.093 2.093,0.75 3.75,0.75 L12.75,0.75 C14.407,0.75 15.75,2.093 15.75,3.75 L15.75,9.75 M13.25,15.75 L18.25,15.75 M15.75,13.25 L15.75,18.25" id="frame" stroke-linecap="round"></path>
+                                            </g>
+                                        </g>
+                                    </svg>
+                               </span>
+                            </div>
+                            <div class="icon_action_bar-label"><span class="action_bar-label-text" id="">Follow</span></div>
+                         </a>
+                      </div>
+                     {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 box">
+    {% include "qa/includes/profile_left_sidebar.html" %}
+    </div>
+    <div class="col-md-10 box">
+        <div class="list_header">
+            <span><span class="count">{{post_list.count}}</span> {{active_page.title}}</span>
+        </div>
+        <div class="profile_tab_content">
+            {% if active_page == "answers" or active_page == "" %}
+                {% include "qa/includes/answer_list.html" %}
+            {% elif active_page == "questions" %}
+                {% include "qa/includes/question_list.html" %}
+            {% endif %}
+        </div>
+    </div>
+{% else %}
+    <p class="no_post_info">User not found!</p>
+{% endif %}
+{% endblock %}
+
+

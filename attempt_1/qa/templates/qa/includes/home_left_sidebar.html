@@ -1,0 +1,86 @@
+{% load qa_extras %}
+<div class="layout_3col_left">
+   <div>
+      <div class="row section">
+         <div class="left_nav_list">
+            <h3 class="title">
+               <div class="title_with_link">Feeds</div>
+            </h3>
+            <div class="home_left_nav_list_content">
+               <div class="pagedlist_item">
+                  <div class="HomeNavListContentItem {% if active_page == 'home_top' %} home_nav_item_selected {% endif %}">
+                     <ul>
+                        <li class="NavListItem HomeNavListItem ">
+                           <a class="disable_click_on_edit_mode" href="{% url 'qa:top_stories' %}" >
+                              <span class="home_nav_non_topic_item">
+                                 <div class="icon_frame">
+                                    <div class="feed_icon icon_element"></div>
+                                 </div>
+                                 Top Stories
+                              </span>
+                           </a>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+               <div class="pagedlist_item">
+                  <div class="HomeNavListContentItem {% if active_page == 'home_new' %} home_nav_item_selected {% endif %}">
+                     <ul>
+                        <li class="NavListItem HomeNavListItem">
+                           <a class="disable_click_on_edit_mode" href="{% url 'qa:home' %}" >
+                              <span class="home_nav_non_topic_item">
+                                 <div class="icon_frame">
+                                    <div class="questions_feed_icon icon_element"></div>
+                                 </div>
+                                 New Questions
+                              </span>
+                           </a>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+               <div class="pagedlist_item">
+                  <div class="HomeNavListContentItem {% if active_page == 'home_book' %} home_nav_item_selected {% endif %}">
+                     <ul>
+                        <li class="NavListItem HomeNavListItem ">
+                           <a class="disable_click_on_edit_mode" href="{% url 'qa:bookmarked_answers' %}" >
+                              <span class="home_nav_non_topic_item">
+                                 <div class="icon_frame">
+                                    <div class="bookmark_icon icon_element"></div>
+                                 </div>
+                                 Bookmarked Answers
+                              </span>
+                           </a>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+               {% if user.is_authenticated %}
+                    {% for btopic in user.booktopic_set.all %}
+                    {% with btopic.topic.id|stringformat:"i"|gettopicview as ap %}
+                    <div class="pagedlist_item">
+                      <div class="HomeNavListContentItem {% if active_page == ap %} home_nav_item_selected {% endif %}">
+                         <ul>
+                            <li class="NavListItem HomeNavListItem {{ap}}  {{active_page}}">
+                               <a class="disable_click_on_edit_mode" href="{% url 'qa:show_topic' topic_id=btopic.topic.id %}" >
+                                  <span class="home_nav_non_topic_item">
+                                     <div class="icon_frame">
+                                        <div class="img_element">
+                                            <img src="/static/images/tag_icon.png" />
+                                        </div>
+                                     </div>
+                                     {{btopic.topic.topic_text}}
+                                  </span>
+                               </a>
+                            </li>
+                         </ul>
+                      </div>
+                   </div>
+                    {% endwith %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

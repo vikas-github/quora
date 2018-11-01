@@ -1,0 +1,40 @@
+{% load qa_extras %}
+<div class="modal fade edit_question_topics_modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header with-subheader">
+              <div class="modal-header-holder">
+                    <h5 class="modal-title">Edit Question Topics</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+              </div>
+              <p class="modal-subheader">Topics are used to find the best experts to answer the question.</p>
+          </div>
+          <div class="modal-body">
+                <div class="alert alert-dismissible alert-danger hide">
+                    <!--<button type="button" class="close" data-dismiss="alert">&times;</button>-->
+                    <span class="error_text"></span>
+                </div>
+                <div class="add_new_topic">
+                    {% csrf_token %}
+                    <input class="topic_search" name="topic_search" placeholder="Search for a topic" />
+                    <input type="hidden" name="qid" value="" />
+                    <input type="hidden" name="post_item" value="" />
+                </div>
+                <!--<div class="topic_list">-->
+                    <!--<ul class="topic_list_holder">-->
+                        <!--<li class="topic_list_item">-->
+                            <!--<a class="topic_item_delete"></a>-->
+                            <!--<span class="topic_item_text">Entertainment</span>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+          </div>
+          <div class="modal-footer">
+              <a href="#" class="edit_topic_cancel" data-dismiss="modal">Cancel</a>
+              <a href="#" class="change_question_topic_submit">Save Changes</a>
+          </div>
+        </div>
+      </div>
+</div>

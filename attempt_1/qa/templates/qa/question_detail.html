@@ -1,0 +1,339 @@
+{% extends 'qa/two_col_base.html' %}
+{% load qa_extras %}
+
+{% block title %}{{question.question_text}}{% endblock %}
+{% block main_class %}white-bg{% endblock %}
+{% block menu_content %}
+    {% include "qa/includes/nav.html" %}
+{% endblock %}
+{% block qdetail_right_sidebar %}
+    {% include "qa/includes/question_detail_right_sidebar.html" %}
+{% endblock %}
+
+{% block col1_width_block %}8{% endblock %}
+{% block col2_width_block %}4{% endblock %}
+
+{% block content %}
+
+<div class="question_details post_item" id="q_post_item_{{question.id}}">
+    <div class="question_header">
+        <div class="question_topics_container type2">
+           <div class="topics_holder">
+              <div class="TopicListItem type2">
+                 <div class="u-inline-block">
+                    <div class="item_list">
+                        {% for qtopic in question.questiontopic_set.all %}
+                        <a class="HoverMenu TopicNameLink topic_name" href="/topic/{{qtopic.topic.id}}">
+                            <span class="topic_name_text">
+                                <span class="TopicNameSpan TopicName">{{qtopic.topic.topic_text}}</span>
+                            </span>
+                        </a>
+                        {% endfor  %}
+                     </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+        <div class="question_title">
+            <p class="main-feed-header-text big-title-text uni_question_id_{{question.id}}" >{{question.question_text}}</p>
+        </div>
+        <div class="action_bar">
+            {% if user.is_authenticated %}
+            <div>
+              <span class="action_item_holder">
+                 <a class="icon_action_bar-button blue_icon" href={% url "qa:post_answer" question.id %} >
+                    <div class="icon_action_bar-icon icon_action_bar-icon_offset">
+                       <span class="action_bar-inline_icon">
+                          <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                             <g id="answer" transform="translate(2.500000, 3.500000)" stroke="none" fill="none" fill-rule="evenodd">
+                                <g id="pen" transform="translate(9.000000, 9.000000) rotate(-315.000000) translate(-9.000000, -9.000000) translate(7.000000, -1.000000)">
+                                   <path d="M2,8.8817842e-16 L2,8.8817842e-16 L2,8.8817842e-16 C3.1045695,6.85269983e-16 4,0.8954305 4,2 L4,16 L2.00256278,20 L0,16 L0,2 L0,2 C-1.35267774e-16,0.8954305 0.8954305,1.09108686e-15 2,8.8817842e-16 Z" id="pen_body" class="icon_svg-stroke" stroke="#666" stroke-linecap="round" stroke-linejoin="round"></path>
+                                   <polygon id="pen_tip" class="icon_svg-fill_as_stroke" fill="#666" transform="translate(2.000000, 18.750000) scale(1, -1) translate(-2.000000, -18.750000) " points="2 17.5 3.25 20 0.75 20"></polygon>
+                                </g>
+                                <path d="M12,16 L17,16 L17,11 M7,1 L2,1 L2,6" id="bg" class="icon_svg-stroke" stroke="#666" stroke-linecap="round" stroke-linejoin="round"></path>
+                             </g>
+                          </svg>
+                       </span>
+                    </div>
+                    <div class="icon_action_bar-label"><span class="action_bar-label-text" id="">Answer</span></div>
+                 </a>
+               </span>
+            </div>
+            <div class="action_item">
+                 <a class="icon_action_bar-button follow_question {% if question|isquestionfollowed:user == '1' %}pressed{% endif %}" data-question="{{question.id}}" data-action="{% if question|isquestionfollowed:user == '1' %}0{% else %}1{% endif %}" href={% url "qa:post_answer" question.id %} >
+                   {% csrf_token %}
+                    <div class="icon_action_bar-icon icon_action_bar-icon_offset">
+                       <span class="action_bar-inline_icon">
+                          <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <g stroke="none" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                                    <g id="follow" class="icon_svg-stroke" stroke="#666" stroke-width="1.5">
+                                        <path d="M14.5,19 C14.5,13.3369229 11.1630771,10 5.5,10 M19.5,19 C19.5,10.1907689 14.3092311,5 5.5,5" id="lines"></path>
+                                        <circle id="circle" cx="7.5" cy="17" r="2" class="icon_svg-fill" fill="none"></circle>
+                                    </g>
+                                </g>
+                          </svg>
+                       </span>
+                    </div>
+                    <div class="icon_action_bar-label">
+                        <span class="action_bar-label-text" >Follow</span>
+                        <span class="icon_action_bar-count">
+                             <span class="bullet">&nbsp;&bull;&nbsp;</span>
+                             <span class="action_count">{{question|getquestionfollowcount}}</span>
+                        </span>
+                    </div>
+                 </a>
+               </div>
+            <div class="action_bar_inner_spacer u-margin-left--auto">&nbsp;</div>
+            <!--<div class="CommentActionItem">-->
+                <!--<span>-->
+                  <!--<a class="comment_action_item secondary_action icon_action_bar-button icon_action_bar-secondary-button" href="#" >-->
+                     <!--<div class="icon_action_bar-icon">-->
+                        <!--<span class="action_bar-inline_icon">-->
+                           <!--<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">-->
+                                <!--<g id="comment" class="icon_svg-stroke icon_svg-fill" stroke="#666" stroke-width="1.5" fill="none" fill-rule="evenodd">-->
+                                    <!--<path d="M12.0711496,18.8605911 C16.1739904,18.8605911 19.5,15.7577921 19.5,11.9302955 C19.5,8.102799 16.1739904,5 12.0711496,5 C7.96830883,5 4.64229922,8.102799 4.64229922,11.9302955 C4.64229922,13.221057 5.02055525,14.429401 5.67929998,15.4641215 C5.99817082,15.9649865 4.1279592,18.5219189 4.56718515,18.9310749 C5.02745574,19.3598348 7.80252458,17.6358115 8.37002246,17.9406001 C9.45969688,18.5258363 10.7235179,18.8605911 12.0711496,18.8605911 Z"></path>-->
+                                <!--</g>-->
+                            <!--</svg>-->
+                        <!--</span>-->
+                     <!--</div>-->
+                  <!--</a>-->
+               <!--</span>-->
+            <!--</div>-->
+            <div class="FacebookShareActionItem">
+               <a class="icon_action_bar-button icon_action_bar-secondary-button" href="#" >
+                  <div class="icon_action_bar-icon">
+                     <span class="action_bar-inline_icon">
+                        <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                           <g id="Page-1" stroke="none" fill="none" fill-rule="evenodd">
+                              <g id="share_facebook" class="icon_svg-fill_as_stroke" fill="#666666">
+                                 <path d="M15.0352899,20 L15.0352899,13.8064419 L17.1142712,13.8064419 L17.4255221,11.3926592 L15.0352899,11.3926592 L15.0352899,9.85156554 C15.0352899,9.1527191 15.2293273,8.67649438 16.2315146,8.67649438 L17.5097169,8.67589513 L17.5097169,6.51703371 C17.2885933,6.48767041 16.5298816,6.42193258 15.647185,6.42193258 C13.8043086,6.42193258 12.5427056,7.54678652 12.5427056,9.61258427 L12.5427056,11.3926592 L10.4584509,11.3926592 L10.4584509,13.8064419 L12.5427056,13.8064419 L12.5427056,20 L4.88270262,20 C4.39509213,20 4.00000599,19.6047341 4.00000599,19.1173034 L4.00000599,4.88904869 C4.00000599,4.4014382 4.39509213,4.00629213 4.88270262,4.00629213 L19.1108974,4.00629213 C19.5983281,4.00629213 19.993594,4.4014382 19.993594,4.88904869 L19.993594,19.1173034 C19.993594,19.6047341 19.5983281,20 19.1108974,20 L15.0352899,20 Z" id="Combined-Shape"></path>
+                              </g>
+                           </g>
+                        </svg>
+                     </span>
+                  </div>
+               </a>
+            </div>
+            <div class="TwitterShareActionItem">
+               <a class="icon_action_bar-button icon_action_bar-secondary-button" href="#" >
+                  <div class="icon_action_bar-icon">
+                     <span class="action_bar-inline_icon">
+                        <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                           <g id="Page-1" stroke="none" fill="none" fill-rule="evenodd">
+                              <g id="share_twitter" class="icon_svg-fill_as_stroke" fill="#666666" fill-rule="nonzero">
+                                 <path d="M8.84616,19.3134989 C15.26128,19.3134989 18.77008,13.9986189 18.77008,9.38957894 C18.77008,9.23861894 18.77008,9.08833894 18.75988,8.93873894 C19.4424853,8.44499832 20.0317217,7.83365693 20.5,7.13333894 C19.8634378,7.41540415 19.1881639,7.60038242 18.49672,7.68209894 C19.2248259,7.24620674 19.769764,6.56062389 20.03012,5.75293894 C19.3454671,6.15920856 18.5964393,6.44552712 17.81536,6.59953894 C16.7342163,5.44992705 15.0162892,5.1685555 13.6248935,5.91320129 C12.2334978,6.65784709 11.514667,8.24332044 11.87148,9.78057894 C9.0670891,9.63998863 6.45424353,8.31539877 4.6832,6.13645894 C3.75746347,7.73013736 4.23031176,9.76892339 5.76304,10.7924189 C5.20798402,10.7759681 4.66502997,10.6262359 4.18,10.3558589 C4.18,10.3701389 4.18,10.3850989 4.18,10.4000589 C4.18045433,12.0603422 5.35079101,13.4903429 6.9782,13.8190989 C6.46471132,13.9591382 5.9259548,13.9796091 5.40332,13.8789389 C5.86024459,15.2997465 7.1696707,16.273072 8.66188,16.3010989 C7.42681983,17.2717527 5.90112047,17.7986818 4.33028,17.7970989 C4.05277443,17.7965662 3.77553876,17.779764 3.5,17.7467789 C5.09503245,18.770367 6.95094111,19.3133064 8.84616,19.3107789" id="Shape"></path>
+                              </g>
+                           </g>
+                        </svg>
+                     </span>
+                  </div>
+               </a>
+            </div>
+            {% if question.question_author == user %}
+            <div class="QuestionMoreOption dropdown show">
+               <a id="dropdownMenuLink" class="icon_action_bar-button icon_action_bar-secondary-button self_question_more_option dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <div class="icon_action_bar-icon">
+                     <span class="action_bar-inline_icon">
+                        <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <g id="overflow" class="icon_svg-stroke" stroke-width="1.5" stroke="#666" fill="none" fill-rule="evenodd">
+                                <path d="M5,14 C3.8954305,14 3,13.1045695 3,12 C3,10.8954305 3.8954305,10 5,10 C6.1045695,10 7,10.8954305 7,12 C7,13.1045695 6.1045695,14 5,14 Z M12,14 C10.8954305,14 10,13.1045695 10,12 C10,10.8954305 10.8954305,10 12,10 C13.1045695,10 14,10.8954305 14,12 C14,13.1045695 13.1045695,14 12,14 Z M19,14 C17.8954305,14 17,13.1045695 17,12 C17,10.8954305 17.8954305,10 19,10 C20.1045695,10 21,10.8954305 21,12 C21,13.1045695 20.1045695,14 19,14 Z"></path>
+                            </g>
+                        </svg>
+                     </span>
+                  </div>
+               </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item edit_question_text" data-qid="{{question.id}}" data-question-text="{{question.question_text}}" href="#">Edit Question Text</a>
+                    <a class="dropdown-item edit_question_topic" data-qid="{{question.id}}" data-prefill-topics="{{ question|gettopicarray }}"  href="#">Edit Topics</a>
+                </div>
+            </div>
+            {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="question_body">
+        <div class="question_answer_header">
+            {% if question.answer_set.all %}
+            <div class="answer_count">{{question.answer_set.all|length}} Answer{{question.answer_set.all|length|pluralize}}</div>
+            {% else %}
+            <div class="feed-top-answer-desc">
+                <p class="no-answer-placeholder"><b>No answers yet.</b></p>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="answer-list">
+            {% for answer in question.answer_set.all %}
+            <div class="answer_item">
+                <div class="feed-author answer-author">
+                    <div class="author-info-pic">
+
+                      <img class="profile_photo_img" src="/{{answer.answer_author|getuseravatar}}" alt="Vikas Devde" height="50" width="50" />
+
+                    </div>
+                    <div class="author-info-text">
+                      <div class="author-info-name">
+                          <span class="info-name-holder">
+                             <span class="profile_link">
+                                 <a href="{% url 'qa:user_profile' answer.answer_author.id %}" >{{answer.answer_author.first_name}} {{answer.answer_author.last_name}}</a>
+                             </span>
+                             {% if answer.answer_author.userprofile.profile_cred %}
+                             <span class="profile_cred">, {{answer.answer_author.userprofile.profile_cred}}</span>
+                             {% elif answer.answer_author.userprofile.profession %}
+                             <span class="profile_cred">, {{answer.answer_author.userprofile.profession}}</span>
+                             {% endif %}
+                         </span>
+                      </div>
+                      <div class="feed-answered"><a href={% url "qa:show_answer" question_id=question.id answer_id=answer.id %} class="feed-answered-link">Answered {{answer.a_pub_date}}</a></div>
+                    </div>
+                </div>
+                <div class="feed-top-answer-desc answer-item-desc full_mode">
+                    <p class="">{{answer.answer_text|linebreaks}}</p>
+                </div>
+                <div class="action_bar answer-action_bar">
+                    {% if user.is_authenticated %}
+                   <div class="action_item">
+                     <a class="icon_action_bar-button blue_icon upvote-answer-action {% if answer|isupvoted:user == '1' %}pressed{% endif %}" data-vote="1" data-answer-id="{{answer.id}}" data-question-id="{{question.id}}" href="#" >
+                         <div class="icon_action_bar-icon icon_action_bar-icon_offset">
+                            <span class="action_bar-inline_icon">
+                               <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                  <g id="upvote" class="icon_svg-stroke icon_svg-fill" stroke-width="1.5" stroke="#666" fill="none" fill-rule="evenodd" stroke-linejoin="round">
+                                     <polygon points="12 4 3 15 9 15 9 20 15 20 15 15 21 15"></polygon>
+                                  </g>
+                               </svg>
+                            </span>
+                         </div>
+                         <div class="icon_action_bar-label">
+                             <span class="action_bar-label-text" >Upvote</span>
+                             <span class="icon_action_bar-count">
+                                 <span class="bullet"> · </span>
+                                 <span class="vote-count">{{answer|getupvotecount}}</span>
+                             </span>
+                         </div>
+                      </a>
+                   </div>
+                   <div class="action_item">
+                      <a class="icon_action_bar-button share-answer-item" data-link="/answer/{{answer.id}}" href="#" >
+                         <div class="icon_action_bar-icon icon_action_bar-icon_offset">
+                            <span class="action_bar-inline_icon">
+                               <svg width="72px" height="72px" viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                  <g stroke="none" fill-rule="evenodd" class="icon_svg-fill-as-stroke" fill="#666666">
+                                     <path d="M52.9771128,43.6844872 L49.3666709,45.2170289 C48.2228141,45.7025673 46.9019283,45.1688948 46.4163899,44.025038 C45.9308515,42.8811812 46.464524,41.5602954 47.6083808,41.074757 L56.7737124,37.1843046 C56.7775109,37.1826706 56.781316,37.1810459 56.7851278,37.1794307 C57.9289948,36.6939163 59.2498806,37.2275888 59.735419,38.3714456 C59.7473185,38.3994792 59.7586059,38.4276192 59.7692871,38.4558506 L63.3375042,47.7513738 C63.7828268,48.9114788 63.2033812,50.2129351 62.0432761,50.6582577 C60.8831711,51.1035803 59.5817149,50.5241346 59.1363923,49.3640296 L57.4019323,44.8456067 C53.8266758,52.9071086 45.7532718,58.5302552 36.3665114,58.5302552 C25.332728,58.5302552 16.1136244,50.7606874 13.8817799,40.3941313 L13.8789565,40.3946582 C13.8790691,40.390676 13.879192,40.3866953 13.8793254,40.382716 C13.8789952,40.3809074 13.8791413,40.3807975 13.8793949,40.3806684 C13.9127483,39.4112654 14.5618887,38.5311597 15.5446728,38.2493508 C16.6753689,37.925129 17.8512059,38.5065386 18.2970425,39.5639119 L18.3071273,39.5620803 C20.1471587,47.8404964 27.5339873,54.0302552 36.3665114,54.0302552 C43.6572653,54.0302552 49.9629832,49.8128151 52.9771128,43.6844872 Z" id="Combined-Shape"></path>
+                                     <path d="M19.3893987,27.845768 L22.9998406,26.3132263 C24.1436974,25.8276879 25.4645831,26.3613604 25.9501215,27.5052172 C26.4356599,28.649074 25.9019874,29.9699598 24.7581307,30.4554982 L15.592799,34.3459506 C15.5890005,34.3475846 15.5851954,34.3492092 15.5813836,34.3508245 C14.4375167,34.8363389 13.1166309,34.3026664 12.6310925,33.1588096 C12.6191929,33.130776 12.6079055,33.102636 12.5972243,33.0744046 L9.02900724,23.7788814 C8.58368465,22.6187764 9.16313029,21.3173201 10.3232353,20.8719975 C11.4833403,20.4266749 12.7847966,21.0061206 13.2301192,22.1662256 L14.9645792,26.6846485 C18.5398356,18.6231466 26.6132397,13 36,13 C47.0337834,13 56.2528871,20.7695678 58.4847315,31.1361239 L58.4875549,31.135597 C58.4874424,31.1395792 58.4873194,31.1435599 58.4871861,31.1475392 C58.4875163,31.1493478 58.4873702,31.1494577 58.4871166,31.1495868 C58.4537631,32.1189898 57.8046227,32.9990955 56.8218386,33.2809044 C55.6911425,33.6051262 54.5153056,33.0237166 54.069469,31.9663433 L54.0593841,31.9681749 C52.2193527,23.6897588 44.8325242,17.5 36,17.5 C28.7092462,17.5 22.4035283,21.7174401 19.3893987,27.845768 Z" id="Combined-Shape"></path>
+                                  </g>
+                               </svg>
+                            </span>
+                         </div>
+                         <div class="icon_action_bar-label"><span class="action_bar-label-text" >Share</span></div>
+                      </a>
+                   </div>
+                   {% if answer.answer_author.pk == user.pk %}
+                   <div class="action_item">
+                      <a class="icon_action_bar-button" href="{% url 'qa:edit_answer' question.id answer.id %}" >
+                         <div class="icon_action_bar-icon icon_action_bar-icon_offset">
+                            <span class="action_bar-inline_icon">
+                              <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                 <g id="answer" transform="translate(2.500000, 3.500000)" stroke="none" fill="none" fill-rule="evenodd">
+                                    <g id="pen" transform="translate(9.000000, 9.000000) rotate(-315.000000) translate(-9.000000, -9.000000) translate(7.000000, -1.000000)">
+                                       <path d="M2,8.8817842e-16 L2,8.8817842e-16 L2,8.8817842e-16 C3.1045695,6.85269983e-16 4,0.8954305 4,2 L4,16 L2.00256278,20 L0,16 L0,2 L0,2 C-1.35267774e-16,0.8954305 0.8954305,1.09108686e-15 2,8.8817842e-16 Z" id="pen_body" class="icon_svg-stroke" stroke="#666" stroke-linecap="round" stroke-linejoin="round"></path>
+                                       <polygon id="pen_tip" class="icon_svg-fill_as_stroke" fill="#666" transform="translate(2.000000, 18.750000) scale(1, -1) translate(-2.000000, -18.750000) " points="2 17.5 3.25 20 0.75 20"></polygon>
+                                    </g>
+                                    <path d="M12,16 L17,16 L17,11 M7,1 L2,1 L2,6" id="bg" class="icon_svg-stroke" stroke="#666" stroke-linecap="round" stroke-linejoin="round"></path>
+                                 </g>
+                              </svg>
+                            </span>
+                         </div>
+                         <div class="icon_action_bar-label"><span class="action_bar-label-text" >Edit Answer</span></div>
+                      </a>
+                   </div>
+                   {% endif %}
+                   <div class="action_item">
+                      <a class="bookmark_answer icon_action_bar-button {% if answer|isanswerbookmarked:user == '1' %}pressed{% endif %}" href="#" data-book-action="{% if answer|isanswerbookmarked:user == '1' %}0{% else %}1{% endif %}" data-answer="{{answer.id}}">
+                         <div class="icon_action_bar-icon icon_action_bar-icon_offset">
+                            <span class="action_bar-inline_icon">
+                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g id="bookmark" class="icon_svg-stroke icon_svg-fill" stroke="#666" fill="none" stroke-width="1.5" fill-rule="evenodd" stroke-linejoin="round">
+                                        <polygon points="12.0014329 15 5.50286589 20 5.5 5 18.5 5 18.5 20"></polygon>
+                                    </g>
+                                </svg>
+                            </span>
+                         </div>
+                         <div class="icon_action_bar-label"><span class="action_bar-label-text" >Bookmark</span></div>
+                      </a>
+                   </div>
+                   <div class="action_bar_inner_spacer u-margin-left--auto">&nbsp;</div>
+                   <div class="action_item">
+                      <a class="icon_action_bar-button downvote-answer-action {% if answer|isdownvoted:user == '1' %}pressed{% endif %}" data-vote="0" data-answer-id="{{answer.id}}" data-question-id="{{question.id}}" href="#" >
+                         <div class="icon_action_bar-icon icon_action_bar-icon_offset">
+                            <span class="action_bar-inline_icon">
+                               <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                  <g id="downvote" class="icon_svg-stroke icon_svg-fill" stroke="#666" fill="none" stroke-width="1.5" fill-rule="evenodd" stroke-linejoin="round">
+                                     <polygon transform="translate(12.000000, 12.000000) rotate(-180.000000) translate(-12.000000, -12.000000) " points="12 4 3 15 9 15 9 20 15 20 15 15 21 15"></polygon>
+                                  </g>
+                               </svg>
+                            </span>
+                         </div>
+                         <div class="icon_action_bar-label">
+                             <span class="action_bar-label-text" >Downvote</span>
+                             <span class="icon_action_bar-count">
+                                 <span class="bullet"> · </span>
+                                 <span class="vote-count">{{answer|getdownvotecount}}</span>
+                             </span>
+                         </div>
+                      </a>
+                   </div>
+                    {% endif %}
+                </div>
+
+                <div class="comments_block">
+                    {% if user.is_authenticated %}
+                    <div class="add_coment_block">
+                        <div class="user-profile-dp">
+                            <a href="#" class=""><img src="/{{user|getuseravatar}}" /></a>
+                        </div>
+                        <div class="comment_box">
+                            {% csrf_token %}
+                            <input type="text" class="user_comment_input form-control"  placeholder="Add a comment..." />
+                            <button type="button" class="user_comment_submit form-control btn btn-primary" data-question="{{question.id}}" data-answer="{{answer.id}}">Comment</button>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="show_comment_block">
+                        <ul class="comment_list">
+                            {% if not answer.answercomment_set.all|length == 0 %}
+                                {% for comment in answer.answercomment_set.all %}
+                                <li class="comment_item">
+                                    <div class="comment-meta">
+                                        <div class="comment-author-info-pic">
+                                          <img class="profile_photo_img" src="/{{comment.comment_user|getuseravatar}}" alt="{{comment.comment_user.first_name}} {{comment.comment_user.last_name}}" height="50" width="50">
+                                        </div>
+                                        <div class="comment-author-info-text">
+                                          <div class="comment-author-info-name">
+                                             <span><a href="#">{{comment.comment_user.first_name}} {{comment.comment_user.last_name}}</a></span>
+                                          </div>
+                                          <div class="comment-date"><a href="{% url 'qa:show_answer' question_id=question.id answer_id=answer.id %}#{{comment.id}}" class="comment-date-link">{{comment.comment_date}}</a></div>
+                                        </div>
+                                    </div>
+                                    <div class="comment-content">
+                                        <p class="comment_text">{{comment.comment_text}}</p>
+                                    </div>
+                                    <div class="comment-actions">
+
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <!--answer end-->
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+
